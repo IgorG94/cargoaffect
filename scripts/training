@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python3 audioAnalysis.py trainRegression -i training/ --method svm -o training/
+
