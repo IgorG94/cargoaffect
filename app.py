@@ -25,7 +25,7 @@ def detection():
         result = aT.fileRegression(wavfilepath, "training/", "svm")
 
         os.remove(filepath)
-        os.remove(wavfilepath)
+        print(result)
         return jsonify(dict(zip(result[1], result[0])))
 
 
