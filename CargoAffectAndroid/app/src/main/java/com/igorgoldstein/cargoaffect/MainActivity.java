@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     String RandomFileName = "ABCDE";
     public static final int RequestPermissionCode = 1;
 
-    private static final String BASE_URL = "http://192.168.15.20:5000/";
+    private static final String BASE_URL = "http://10.90.69.35:5000/";
     private static Retrofit.Builder builder = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     private static Retrofit retrofit = builder.build();
