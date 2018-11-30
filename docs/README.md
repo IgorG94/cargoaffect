@@ -17,4 +17,4 @@ Para realizar o treinamento do algoritmo SVM, rode o comando `./scripts/training
 ## Documentos
 
 Os documentos do projeto de formatura (Banner e Press Release) estão disponíveis na pasta `docs/`.
-Para acessar a pasta, clique [aqui](https://github.com/IgorG94/cargoaffect/tree/master/docs)
+Para acessar a pasta, clique [aqui](https://github.com/IgorG94/cargoaffect/tree/master/docs).
