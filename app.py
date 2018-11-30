@@ -15,7 +15,7 @@ audio = "training/audio1.wav"
 @app.route('/detect', methods=['GET', 'POST'])
 def detection():
     if request.method == 'POST':
-        f = dict(request.files)[''][0]
+        f = dict(request.files)['file'][0]
         filename = secure_filename(f.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         f.save(filepath)

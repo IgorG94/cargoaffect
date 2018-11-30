@@ -11,10 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import okhttp3.MediaType;
@@ -35,6 +41,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
     Button buttonRecord, buttonStop, buttonPlayLastAudio, buttonStopPlaying;
+    ProgressBar valenceBar, arousalBar, stressBar;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
     String SavePathDevice = null;
@@ -42,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     String RandomFileName = "ABCDE";
     public static final int RequestPermissionCode = 1;
 
-    private static final String BASE_URL = "http://10.90.69.35:5000/";
+    private static final String BASE_URL = "http://10.90.64.126:5000/";
     private static Retrofit.Builder builder = new Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create());
     private static Retrofit retrofit = builder.build();
@@ -60,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         buttonStop = (Button) findViewById(R.id.stop);
         buttonPlayLastAudio = (Button) findViewById(R.id.playlast);
         buttonStopPlaying = (Button) findViewById(R.id.stopplay);
+
+        valenceBar = (ProgressBar) findViewById(R.id.valence);
+        arousalBar = (ProgressBar) findViewById(R.id.arousal);
+        stressBar = (ProgressBar) findViewById(R.id.stress);
 
         buttonStop.setEnabled(false);
         buttonPlayLastAudio.setEnabled(false);
@@ -177,11 +188,6 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public class ServiceGenerator {
-
-
-    }
-
     private void uploadFile(String savePathDevice) {
         // create upload service client
         FileUploadService service = createService(FileUploadService.class);
@@ -209,8 +215,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call,
                                    Response<ResponseBody> response) {
-                Log.v("RETROFIT", response.code()+"");
-                Log.v("RETROFIT", response.message());
+                try {
+                    String s = response.body().string();
+                    HashMap<String,Double> map = new Gson().fromJson(s, new TypeToken<HashMap<String, Double>>(){}.getType());
+                    //Log.v("RETROFIT0", String.valueOf(map.get("arousal")));
+                    Log.v("RETROFIT0", String.valueOf((int) (1000 * (map.get("stress")))));
+                    if (map.get("valence") > 0) {
+                        valenceBar.setProgress((int) (1000 * (map.get("valence"))));
+                    }
+                    if (map.get("arousal") > 0) {
+                        arousalBar.setProgress((int) (1000 * (map.get("arousal"))));
+                    }
+                    if (map.get("stress") > 0) {
+                        stressBar.setProgress((int) (1000 * (map.get("stress"))));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
