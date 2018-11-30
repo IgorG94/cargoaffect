@@ -6,6 +6,8 @@ O projeto CargoAffect consiste em um sistema composto por um aplicativo de captu
 
 Os módulos de análise de áudio foram obtidos a partir da biblioteca [pyAudioAnalysis](https://github.com/tyiannak/pyAudioAnalysis), criada por [Theodoros Giannakopoulos](https://tyiannak.github.io) e explorada [em sua publicação](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144610).
 
+Clique [aqui](https://github.com/IgorG94/cargoaffect) para acessar o repositório do projeto.
+
 ## Configuração
 
 Para rodar a API, rode o comando `./scripts/start`.
@@ -14,4 +16,5 @@ Para realizar o treinamento do algoritmo SVM, rode o comando `./scripts/training
 
 ## Documentos
 
-Os documentos do projeto de formatura (Banner e Press Release) estão disponíveis na pasta `docs/`
+Os documentos do projeto de formatura (Banner e Press Release) estão disponíveis na pasta `docs/`.
+Para acessar a pasta, clique [aqui](https://github.com/IgorG94/cargoaffect/tree/master/docs)
