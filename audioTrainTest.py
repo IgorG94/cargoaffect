@@ -6,8 +6,8 @@ import glob
 import pickle as cPickle
 import csv
 import ntpath
-from pyAudioAnalysis import audioFeatureExtraction as aF
-from pyAudioAnalysis import audioBasicIO
+import audioFeatureExtraction as aF
+import audioBasicIO
 from scipy import linalg as la
 from scipy.spatial import distance
 import sklearn.svm
