@@ -22,16 +22,17 @@ def detection():
 
         if(filepath.endswith(".wav")):
             result = aT.fileRegression(filepath, "training/", "svm")
+            os.remove(filepath)
         else:
             wavfilepath = os.path.splitext(filepath)[0] + '.wav'
             subprocess.call(['ffmpeg', '-i', filepath, wavfilepath])
             result = aT.fileRegression(wavfilepath, "training/", "svm")
+            os.remove(wavfilepath)
 
-        os.remove(filepath)
         print(result)
         return jsonify(dict(zip(result[1], result[0])))
 
 
 if __name__ == "__main__":
-    result = aT.fileRegression(audio, "training/", "svm")
-    print(result)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
